@@ -61,7 +61,7 @@ export const register = async (userData) => {
 // Get current user profile
 export const getCurrentUser = async () => {
   try {
-    const response = await axios.get('/api/user/profile');
+    const response = await axios.get('/api/auth/me');
     return response.data;
   } catch (error) {
     console.error('Get user profile error:', error.response?.data || error);
@@ -69,21 +69,15 @@ export const getCurrentUser = async () => {
   }
 };
 
-// Update user profile
+// Update user profile (not yet implemented on backend)
 export const updateUserProfile = async (userData) => {
-  try {
-    const response = await axios.put('/api/user/profile', userData);
-    return response.data;
-  } catch (error) {
-    console.error('Update profile error:', error.response?.data || error);
-    throw error.response?.data || { message: 'Failed to update profile' };
-  }
+  throw new Error("Profile update is not supported yet.");
 };
 
 // Get user preferences
 export const getUserPreferences = async () => {
   try {
-    const response = await axios.get('/api/user/preferences');
+    const response = await axios.get('/api/user-preferences/location');
     return response.data;
   } catch (error) {
     console.error('Get preferences error:', error.response?.data || error);
@@ -91,10 +85,10 @@ export const getUserPreferences = async () => {
   }
 };
 
-// Update user preferences
-export const updateUserPreferences = async (preferences) => {
+// Update location preferences
+export const updateLocationPreferences = async (preferences) => {
   try {
-    const response = await axios.put('/api/user/preferences', preferences);
+    const response = await axios.put('/api/user-preferences/location', preferences);
     return response.data;
   } catch (error) {
     console.error('Update preferences error:', error.response?.data || error);

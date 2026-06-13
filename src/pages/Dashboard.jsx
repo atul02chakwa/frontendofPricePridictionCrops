@@ -173,19 +173,17 @@ const Dashboard = () => {
                     Prediction Result
                 </CardTitle>
                 <CardDescription>
-                    For {lastPredictionInput.croptype} in {lastPredictionInput.city}, {lastPredictionInput.state} on {new Date(lastPredictionInput.date).toLocaleDateString()}
+                    For {lastPredictionInput.crop} in {lastPredictionInput.district}, {lastPredictionInput.state} on {new Date(lastPredictionInput.date).toLocaleDateString()} ({lastPredictionInput.production} quintals)
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                {predictionResult.predicted_price !== undefined ? (
+                {(predictionResult.predictedPrice !== undefined) ? (
                 <div>
                     <p className="text-lg text-gray-700">
                         Predicted Price: 
                         <span className="ml-2 text-2xl font-bold text-primary">
-                            ₹{Number(predictionResult.predicted_price).toFixed(2)}
+                            ₹{Number(predictionResult.predictedPrice).toFixed(2)}
                         </span>
-                         {/* You might need to infer the unit or get it from elsewhere */}
-                         {/* <span className="text-sm text-gray-500"> / unit</span> */}
                     </p>
                     {/* 
                       If your Python model for this endpoint *can* return a time series

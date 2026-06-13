@@ -1,45 +1,34 @@
 import axios from '../api/axios';
 
-// Get all available locations
-export const getLocations = async () => {
+// Get all states
+export const getStates = async () => {
   try {
-    const response = await axios.get('/api/locations');
+    const response = await axios.get('/api/locations/states');
     return response.data;
   } catch (error) {
-    console.error('Get locations error:', error.response?.data || error);
-    throw error.response?.data || { message: 'Failed to fetch locations' };
+    console.error('Get states error:', error.response?.data || error);
+    throw error.response?.data || { message: 'Failed to fetch states' };
   }
 };
 
-// Get location details
-export const getLocationDetails = async (locationId) => {
+// Get districts by state
+export const getDistrictsByState = async (state) => {
   try {
-    const response = await axios.get(`/api/locations/${locationId}`);
+    const response = await axios.get('/api/locations/districts', { params: { state } });
     return response.data;
   } catch (error) {
-    console.error('Get location details error:', error.response?.data || error);
-    throw error.response?.data || { message: 'Failed to fetch location details' };
+    console.error('Get districts error:', error.response?.data || error);
+    throw error.response?.data || { message: 'Failed to fetch districts' };
   }
 };
 
-// Get crop prices for a specific location
-export const getLocationCropPrices = async (locationId, params) => {
+// Get crops by location
+export const getCropsByLocation = async (state, district) => {
   try {
-    const response = await axios.get(`/api/locations/${locationId}/prices`, { params });
+    const response = await axios.get('/api/locations/crops', { params: { state, district } });
     return response.data;
   } catch (error) {
-    console.error('Get location prices error:', error.response?.data || error);
-    throw error.response?.data || { message: 'Failed to fetch location prices' };
-  }
-};
-
-// Get market information for a location
-export const getLocationMarkets = async (locationId) => {
-  try {
-    const response = await axios.get(`/api/locations/${locationId}/markets`);
-    return response.data;
-  } catch (error) {
-    console.error('Get location markets error:', error.response?.data || error);
-    throw error.response?.data || { message: 'Failed to fetch market information' };
+    console.error('Get crops error:', error.response?.data || error);
+    throw error.response?.data || { message: 'Failed to fetch crops' };
   }
 }; 

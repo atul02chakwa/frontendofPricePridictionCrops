@@ -103,7 +103,6 @@ export const AuthProvider = ({ children }) => {
     setError(null);
     try {
       const response = await authService.updateUserProfile(profileData);
-      // Assuming response.data is the updated user object
       setUser(response.data); 
       return response.data;
     } catch (err) {
@@ -113,6 +112,17 @@ export const AuthProvider = ({ children }) => {
       throw new Error(errorMessage);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const getCurrentUserProfile = async () => {
+    try {
+      const response = await authService.getCurrentUser();
+      setUser(response.data);
+      return response.data;
+    } catch (err) {
+      console.error('Get current user profile error:', err);
+      throw err;
     }
   };
 
@@ -127,7 +137,8 @@ export const AuthProvider = ({ children }) => {
         register: handleRegister,
         logout: handleLogout,
         updateProfile: handleUpdateProfile,
-        updateUserInContext, // <<< EXPOSE THIS NEW FUNCTION
+        updateUserInContext,
+        getCurrentUserProfile,
         isAuthenticated: !!user,
       }}
     >

@@ -112,23 +112,5 @@ export const getCurrentUser = async () => {
 };
 
 export const updateUserProfile = async (userData) => {
-  try {
-    const response = await fetch(`${BASE_URL}/profile`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem("token")}`
-      },
-      body: JSON.stringify(userData)
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to update profile.");
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error("Update profile error:", error);
-    throw error;
-  }
+  throw new Error("Profile update is not supported yet.");
 };

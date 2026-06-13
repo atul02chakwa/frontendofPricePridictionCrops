@@ -53,10 +53,9 @@ export default function Profile() {
     setIsLoading(true);
 
     try {
-      await updateProfile(formData); // Use updateProfile from AuthContext
+      await updateProfile(formData);
       toast.success("Profile updated successfully");
       setIsEditing(false);
-      // User state in AuthContext will be updated, triggering useEffect
     } catch (error) {
       toast.error(error.message || "Failed to update profile");
     } finally {
